@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\aaron\documents\visual studio 2015\projects\dungeoncalc\dungeoncalc\main.cpp(303): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\aaron\documents\visual studio 2015\projects\dungeoncalc\dungeoncalc\main.cpp(347): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\aaron\documents\visual studio 2015\projects\dungeoncalc\dungeoncalc\main.cpp(354): warning C4018: '>=': signed/unsigned mismatch
+  DungeonCalc.vcxproj -> C:\Users\aaron\documents\visual studio 2015\Projects\DungeonCalc\Debug\DungeonCalc.exe
