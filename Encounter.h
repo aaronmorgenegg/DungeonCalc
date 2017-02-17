@@ -9,9 +9,11 @@ class Encounter {
 public:
 	Encounter();
 	Encounter(std::string filename);
+	void save(std::string filename);
 	void update();
-	void addUnit();
-	void deleteUnit();
+	void addUnit(std::string unitString);
+	void deleteUnit(std::string name);
+	int getUnitIndex(std::string name);
 	void clear();
 	Unit edit();
 	std::string toString();

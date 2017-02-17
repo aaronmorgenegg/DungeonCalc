@@ -10,6 +10,7 @@ class Unit {
 public:
 	Unit();
 	Unit(std::string name, int initiative, int hp, std::string note, bool favorite);
+	Unit(std::string unitString);
 	bool operator < (const Unit& str) const;
 	std::string toString();
 	std::string setName(int newName);

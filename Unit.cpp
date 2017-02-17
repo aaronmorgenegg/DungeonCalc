@@ -17,6 +17,25 @@ Unit::Unit(std::string name, int initiative, int hp, std::string note, bool favo
 }
 
 /*
+Constructs a unit from a string in the form of name,initiative,hp,note,favorite
+*/
+Unit::Unit(std::string unitString) {
+	std::vector<std::string> unitStats = split(unitString, ',');
+	this->name = unitStats[0];
+
+	if (unitStats[1] == "") this->initiative = 0;
+	else this->initiative = stoi(unitStats[1]);
+
+	if (unitStats[2] == "") this->hp = 0;
+	else this->hp = stoi(unitStats[2]);
+
+	this->note = unitStats[3];
+
+	if (unitStats[4] == "" || unitStats[4] == "false" || unitStats[4] == "0") this->favorite = false;
+	else this->favorite = true;
+}
+
+/*
 Comparison operator compares unit initiative in descending order
 */
 bool Unit::operator < (const Unit& str) const
