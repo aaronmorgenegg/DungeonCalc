@@ -1,3 +1,7 @@
+
+IDEAS
+-Allow adding additional fields
+	-ie fort saves, psi, etc based on need/system
 -Status effects with a timer
 -save/load encounters/units to and from a file
 	-marked by favorites, can load favorites to start an encounter
@@ -12,5 +16,8 @@
 	status inflicted list
 	# of status inflicted
 	difficulty rating of encounter, based on above data.
-	
+-AI
+	-Enemy ai suggestions
+	-intelligence rating
+	-takes into account data	
 
