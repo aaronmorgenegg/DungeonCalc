@@ -1,4 +1,4 @@
-from version2_python.calculator.dice import *
+from version2_python.Dice.dice import *
 
 
 def testDice(faces, iterations):
