@@ -1,5 +1,6 @@
 from version2_python.Parser.lexer import *
 from version2_python.Dice.dice import *
+from version2_python.runDungeonCalc import encounter
 
 precedence = (
     ('left', 'PLUS', 'MINUS'),

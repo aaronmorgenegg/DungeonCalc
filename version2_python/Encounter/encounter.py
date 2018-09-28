@@ -33,6 +33,22 @@ class Encounter:
         self.units.sort(key=lambda x: x.initiative, reverse=True)
 
     def __str__(self):
-        # TODO
-        return ""
+        header = "-----ENCOUNTER-----"
+        round = "Round : {}".format(self.round_count+1)
+
+        status = ""
+        if len(self.global_status) > 0: status = "Global Status Effects"
+        for i in range(len(self.global_status)):
+            status_string = self.global_status[i].printSimple()
+            status = "  {}\n    {}".format(status, status_string)
+
+        units = "Units"
+        for i in range(len(self.units)):
+            unit_string = self.units[i].printSimple()
+            if self.current_unit == i:
+                units = "  {}\n ** {}".format(units, unit_string)
+            else:
+                units = "  {}\n    {}".format(units, unit_string)
+
+        return "{}\n{}\n{]\n{}\n".format(header, round, status, units)
 
