@@ -1,7 +1,7 @@
 
 tokens = (
-    'NAME', 'NUMBER', 'DICE',
-    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS',
+    'NUMBER', 'DICE',
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     'LPAREN', 'RPAREN',
 )
 
@@ -13,8 +13,7 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_DICE = r'dD'
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_DICE = r'[dD]'
 
 
 def t_NUMBER(t):

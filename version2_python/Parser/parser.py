@@ -4,8 +4,8 @@ from version2_python.calculator.dice import *
 precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
-    ('right', 'UMINUS'),
     ('left', 'DICE'),
+    ('right', 'UMINUS'),
 )
 
 # dictionary of names
