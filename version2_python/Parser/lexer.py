@@ -1,11 +1,6 @@
-# -----------------------------------------------------------------------------
-# calc.py
-#
-# A simple calculator with variables -- all in one file.
-# -----------------------------------------------------------------------------
 
 tokens = (
-    'NAME', 'NUMBER',
+    'NAME', 'NUMBER', 'DICE',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS',
     'LPAREN', 'RPAREN',
 )
@@ -16,9 +11,9 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-t_EQUALS = r'='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+t_DICE = r'dD'
 t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
 
@@ -30,6 +25,7 @@ def t_NUMBER(t):
         print("Integer value too large %d", t.value)
         t.value = 0
     return t
+
 
 
 # Ignored characters

@@ -1,18 +1,15 @@
 from version2_python.Parser.lexer import *
+from version2_python.calculator.dice import *
 
 precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
     ('right', 'UMINUS'),
+    ('left', 'DICE'),
 )
 
 # dictionary of names
 names = {}
-
-
-def p_statement_assign(t):
-    'statement : NAME EQUALS expression'
-    names[t[1]] = t[3]
 
 
 def p_statement_expr(t):
@@ -50,13 +47,13 @@ def p_expression_number(t):
     t[0] = t[1]
 
 
-def p_expression_name(t):
-    'expression : NAME'
-    try:
-        t[0] = names[t[1]]
-    except LookupError:
-        print("Undefined name '%s'" % t[1])
-        t[0] = 0
+def p_expression_dice(t):
+    '''expression : DICE NUMBER
+                  | NUMBER DICE NUMBER'''
+    if len(t) == 4:
+        t[0] = Dice(t[3]).roll(t[1])
+    else:
+        t[0] = Dice(t[2]).roll()
 
 
 def p_error(t):
