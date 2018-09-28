@@ -45,3 +45,17 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Parser output
+parser.out
+parsetab.py
+
+# Visual Paradigm
+*.vpp.bak*
+*.vpp.lck*
+
+# Py cache
+__pycache__/
+
+# PyCharm
+.idea/
