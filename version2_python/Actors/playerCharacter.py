@@ -2,8 +2,8 @@ from version2_python.Actors.unit import Unit
 
 
 class PlayerCharacter(Unit):
-    def __init__(self, names, hp, armor, initiative, initiative_mod, note, player):
-        super().__init__(names, hp, armor, initiative, initiative_mod, note)
+    def __init__(self, name, nicknames, hp, armor, initiative, initiative_mod, note, player):
+        super().__init__(name, nicknames, hp, armor, initiative, initiative_mod, note)
         self.player = player
 
     def printSimple(self):

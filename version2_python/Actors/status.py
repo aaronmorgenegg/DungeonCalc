@@ -2,9 +2,10 @@ from version2_python.Actors.actor import Actor
 
 
 class Status(Actor):
-    def __init__(self, names, time_total, hp_delta=0, armor_delta=0, initiative_delta=0,
+    def __init__(self, name, nicknames, time_total, hp_delta=0, armor_delta=0, initiative_delta=0,
                  hp_mod=0, armor_mod=0, initiative_mod=0, note=None):
-        self.names = names
+        self.name = name
+        self.nicknames = nicknames
         self.time_total = time_total
         self.time_remaining = time_total
         self.hp_delta = hp_delta
@@ -19,7 +20,7 @@ class Status(Actor):
         self.time_remaining -= 1
 
     def printSimple(self):
-        name = "Name: {}".format(self.names)
+        name = "Name: {}".format(self.name)
         time = "Time: {}/{}".format(self.time_remaining, self.time_total)
         note = "Notes: {}".format(self.note)
         return "{},{},{}".format(name, time, note)

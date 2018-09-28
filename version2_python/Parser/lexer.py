@@ -2,7 +2,7 @@
 tokens = (
     'NUMBER', 'DICE',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
-    'LPAREN', 'RPAREN',
+    'LPAREN', 'RPAREN'
 )
 
 # Tokens

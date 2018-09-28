@@ -3,8 +3,9 @@ from version2_python.Config.settings import *
 from version2_python.Dice.dice import Dice, rollInitiative
 
 class Unit(Actor):
-    def __init__(self, names, hp, armor, initiative, initiative_mod, note):
-        self.names = names
+    def __init__(self, name, nicknames, hp, armor, initiative, initiative_mod, note):
+        self.name = name
+        self.nicknames = nicknames
         self.hp = hp
         self.armor = armor
         self.initiative = initiative
@@ -25,12 +26,12 @@ class Unit(Actor):
             status.update()
             self.hp += status.hp_delta
             self.armor += status.armor_delta
-            self.initative += status.initiative_delta
+            self.initiative += status.initiative_delta
 
         self.status = [x for x in self.status if not x.time_left == 0]
 
     def printSimple(self):
-        name = "Name: {}".format(self.names)
+        name = "Name: {}".format(self.name)
         hp = "Health: {}".format(self.hp)
         armor = "Armor: {}".format(self.armor)
         initiative = "Initiative: {}".format(self.initiative)

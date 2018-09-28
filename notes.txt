@@ -1,3 +1,27 @@
+COMMANDS/UI - A user should be able to...
+-Load a unit from a file
+	-l/load name
+-Save a unit to a file
+	-s/save name
+-Clear the encounter
+	-clear/new/delete/reset
+-save an encounter
+	-s/save name
+-load an encounter
+	-l/load name
+-progress to next turn
+	-next/n/\n
+-modify unit health
+	-name h/hp/health expression
+-modify unit initiative
+	-name i/init/initiative expression
+-add unit names
+-add status to unit
+	-ss/status name unit args
+-delete status from unit
+	-d/del/delete status name unit
+
+
 
 IDEAS
 -Allow adding additional fields
