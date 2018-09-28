@@ -2,7 +2,11 @@
 tokens = (
     'NUMBER', 'DICE',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
-    'LPAREN', 'RPAREN'
+    'LPAREN', 'RPAREN',
+    'SAVE', 'LOAD',
+    'STATUS', 'NOTE', 'HEALTH', 'INITIATIVE', 'ARMOR',
+    'NEXTTURN', 'RESET',
+    'HELP'
 )
 
 # Tokens
@@ -13,7 +17,20 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+
 t_DICE = r'[dD]'
+t_SAVE = r'(s)|(save)'
+t_LOAD = r'(l)|(load)'
+t_STATUS = r'(ss)|(status)'
+t_NOTE = r'(note)'
+t_HEALTH = r'(hp)|(health)'
+t_INITIATIVE = r'(i)|(init)|(initiative)'
+t_ARMOR = r'(a)|(av)|(armor)'
+t_NEXTTURN = r'(n)|(next)'
+t_RESET = r'(r)|(reset)|(clear)|(new)'
+t_HELP = r'(h)|(help)'
+
+t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
 
 def t_NUMBER(t):

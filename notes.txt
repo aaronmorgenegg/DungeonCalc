@@ -5,22 +5,22 @@ COMMANDS/UI - A user should be able to...
 	-s/save name
 -Clear the encounter
 	-clear/new/delete/reset
--save an encounter
-	-s/save name
--load an encounter
-	-l/load name
 -progress to next turn
 	-next/n/\n
 -modify unit health
-	-name h/hp/health expression
+	-name hp/health expression
 -modify unit initiative
 	-name i/init/initiative expression
--add unit names
+-add nicknames
+	-name nickname name
+-add note
+	-name n/note string
 -add status to unit
 	-ss/status name unit args
 -delete status from unit
 	-d/del/delete status name unit
-
+-help menu
+	-h-help
 
 
 IDEAS
