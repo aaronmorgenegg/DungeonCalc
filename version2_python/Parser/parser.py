@@ -1,3 +1,4 @@
+from version2_python.Actors.unit import Unit
 from version2_python.Parser.lexer import *
 from version2_python.Dice.dice import *
 from version2_python.runDungeonCalc import encounter
@@ -55,6 +56,34 @@ def p_expression_dice(t):
         t[0] = Dice(t[3]).roll(t[1])
     else:
         t[0] = Dice(t[2]).roll()
+
+
+def p_command_expression(t):
+    'command : expression'
+    print(t[1])
+
+
+def p_command_save_encounter(t):
+    'command : SAVE'
+    encounter.file_manager.save(encounter, "latest_encounter")
+
+
+def p_command_save_item(t):
+    'command : SAVE NAME'
+    data = encounter.lookupName(t[2])
+    encounter.file_manager.save(data, t[2])
+
+
+def p_command_load_encounter(t):
+    'command : LOAD'
+    global encounter
+    encounter = encounter.file_manager.load("latest_encounter")
+
+def p_command_load_item(t):
+    'command : LOAD NAME'
+    data = encounter.file_manager.load(t[2])
+    if isinstance(data, Unit):
+        encounter.addUnit(data)
 
 
 def p_error(t):
