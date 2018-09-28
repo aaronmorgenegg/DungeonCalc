@@ -1,0 +1,16 @@
+-Status effects with a timer
+-save/load encounters/units to and from a file
+	-marked by favorites, can load favorites to start an encounter
+-Allow auto-roll initiative
+-Allow reroll initiative each round
+-Analytics
+	number of rounds
+	damage per round
+	total damage
+	damage taken per round
+	total damage taken
+	status inflicted list
+	# of status inflicted
+	difficulty rating of encounter, based on above data.
+	
+
