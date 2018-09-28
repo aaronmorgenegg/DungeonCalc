@@ -7,6 +7,7 @@ IDEAS
 	-marked by favorites, can load favorites to start an encounter
 -Allow auto-roll initiative
 -Allow reroll initiative each round
+-Notify when changes are made, ie status effects, damage
 -Analytics
 	number of rounds
 	damage per round
@@ -19,5 +20,6 @@ IDEAS
 -AI
 	-Enemy ai suggestions
 	-intelligence rating
+	-Traits, ie aggresive, cowardly
 	-takes into account data	
 

@@ -23,6 +23,11 @@ class Unit(Actor):
     def __updateStatus(self):
         for status in self.status:
             status.update()
+            self.hp += status.hp_delta
+            self.armor += status.armor_delta
+            self.initative += status.initiative_delta
+
+        self.status = [x for x in self.status if not x.time_left == 0]
 
     def printSimple(self):
         name = "Name: {}".format(self.names)
@@ -31,7 +36,7 @@ class Unit(Actor):
         initiative = "Initiative: {}".format(self.initiative)
         status = "Status: {}".format(self.status)
         note = "Notes: {}".format(self.note)
-        return "{}\n{}\n{}\n{}\n{}\n{}".format(name, hp, armor, initiative, status, note)
+        return "{},{},{},{},{},{}".format(name, hp, armor, initiative, status, note)
 
     def printDetail(self):
         # TODO:
