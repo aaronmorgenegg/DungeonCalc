@@ -6,7 +6,8 @@ tokens = (
     'SAVE', 'LOAD',
     'STATUS', 'NOTE', 'HEALTH', 'INITIATIVE', 'ARMOR',
     'NEXTTURN', 'RESET',
-    'HELP'
+    'HELP',
+    'PC', 'NPC'
 )
 
 # Tokens
@@ -29,6 +30,9 @@ t_ARMOR = r'(a)|(av)|(armor)'
 t_NEXTTURN = r'(n)|(next)'
 t_RESET = r'(r)|(reset)|(clear)|(new)'
 t_HELP = r'(h)|(help)'
+t_PC = r'(pc)'
+t_CREATE = r'(add)|(create)|(mk)|(make)'
+t_DELETE = r'(del)|(delete)|(rm)|(remove)'
 
 t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 

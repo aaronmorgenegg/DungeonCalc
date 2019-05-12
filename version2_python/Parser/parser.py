@@ -86,6 +86,10 @@ def p_command_load_item(t):
         encounter.addUnit(data)
 
 
+def p_command_pc_create(t):
+    'command : CREATE PC '
+
+
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
 

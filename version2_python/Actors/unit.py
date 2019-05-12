@@ -1,9 +1,8 @@
-from version2_python.Actors.actor import Actor
 from version2_python.Config.settings import *
 from version2_python.Dice.dice import Dice, rollInitiative
 
-class Unit(Actor):
-    def __init__(self, name, nicknames, hp, armor, initiative, initiative_mod, note):
+class Unit:
+    def __init__(self, name, nicknames=[], hp=0, armor=0, initiative=0, initiative_mod=0, note=None):
         self.name = name
         self.nicknames = nicknames
         self.hp = hp
@@ -13,9 +12,11 @@ class Unit(Actor):
         self.note = note
         self.status = []
 
-    def update(self):
-        self.__updateInitiative()
+    def updateTurn(self):
         self.__updateStatus()
+
+    def updateRound(self):
+        self.__updateInitiative()
 
     def __updateInitiative(self):
         if REROLL_INITIATIVE_EACH_ROUND is True:
@@ -24,11 +25,8 @@ class Unit(Actor):
     def __updateStatus(self):
         for status in self.status:
             status.update()
-            self.hp += status.hp_delta
-            self.armor += status.armor_delta
-            self.initiative += status.initiative_delta
 
-        self.status = [x for x in self.status if not x.time_left == 0]
+        self.status = [x for x in self.status if x.isActive() == 0]
 
     def printSimple(self):
         name = "Name: {}".format(self.name)
