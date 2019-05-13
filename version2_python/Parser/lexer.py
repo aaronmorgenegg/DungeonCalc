@@ -1,15 +1,49 @@
 from version2_python.Dice.dice import Dice
 
-tokens = (
-    'NUMBER', 'DICE',
+
+reserved = {
+    's': 'SAVE',
+    'save': 'SAVE',
+    'l': 'LOAD',
+    'load': 'LOAD',
+    'status': 'STATUS',
+    'ss': 'STATUS',
+    'note': 'NOTE',
+    'hp': 'HEALTH',
+    'health': 'HEALTH',
+    'i': 'INITIATIVE',
+    'init': 'INITIATIVE',
+    'initiative': 'INITIATIVE',
+    'armor': 'ARMOR',
+    'av': 'ARMOR',
+    'ac': 'ARMOR',
+    'a': 'ARMOR',
+    'n': 'NEXTTURN',
+    'next': 'NEXTTURN',
+    'reset': 'RESET',
+    'clear': 'RESET',
+    'new': 'RESET',
+    'r': 'RESET',
+    'help': 'HELP',
+    'h': 'HELP',
+    'add': 'CREATE',
+    'create': 'CREATE',
+    'mk': 'CREATE',
+    'make': 'CREATE',
+    'del': 'DELETE',
+    'delete': 'DELETE',
+    'rm': 'DELETE',
+    'remove': 'DELETE',
+}
+
+tokens = [
+    'NUMBER', 'DICE', 'NAME',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     'LPAREN', 'RPAREN',
-    'SAVE', 'LOAD',
-    'NAME', 'STATUS', 'NOTE', 'HEALTH', 'INITIATIVE', 'ARMOR',
-    'NEXTTURN', 'RESET',
-    'DELETE', 'CREATE',
-    'HELP'
-)
+]
+
+for token in set(reserved.values()):
+    tokens.append(token)
 
 # Tokens
 
@@ -19,21 +53,6 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-
-t_SAVE = r'(save)|(s)'
-t_LOAD = r'(load)|(l)'
-t_STATUS = r'(status)|(ss)'
-t_NOTE = r'(note)'
-t_HEALTH = r'(health)|(hp)'
-t_INITIATIVE = r'(initiative)|(init)|(i)'
-t_ARMOR = r'(armor)|(ac)|(av)|(a)'
-t_NEXTTURN = r'(next)|(n)'
-t_RESET = r'(reset)|(clear)|(new)|(r)'
-t_HELP = r'(help)|(h)'
-t_CREATE = r'(add)|(create)|(mk)|(make)'
-t_DELETE = r'(del)|(delete)|(rm)|(remove)'
-
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
 
 def t_DICE(t):
@@ -53,6 +72,12 @@ def t_NUMBER(t):
     except ValueError:
         print("Integer value too large %d", t.value)
         t.value = 0
+    return t
+
+def t_NAME(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    if t.value in reserved:
+        t.type = reserved[ t.value ]
     return t
 
 
