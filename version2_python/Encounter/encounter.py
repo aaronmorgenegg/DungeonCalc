@@ -69,18 +69,18 @@ class Encounter:
 
         status = ""
         if len(self.global_status) > 0:
-            status = "Global Status Effects"
+            status = "Global Status Effects\n"
             for i in range(len(self.global_status)):
                 status_string = self.global_status[i].printSimple()
-                status = "  {}\n    {}".format(status, status_string)
+                status += "    {}\n".format(status_string)
 
         units = "Units: \n"
         for i in range(len(self.units)):
             unit_string = self.units[i].printSimple()
             if self.current_unit == i:
-                units += "  {}\n ** {}".format(units, unit_string)
+                units += " ** {}\n".format(unit_string)
             else:
-                units += "  {}\n    {}".format(units, unit_string)
+                units += "    {}\n".format(unit_string)
 
-        return "{}\n{}\n{]\n{}\n".format(header, round, status, units)
+        return "{}\n{}\n{}{}".format(header, round, status, units)
 

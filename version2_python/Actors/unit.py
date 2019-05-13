@@ -2,7 +2,7 @@ from version2_python.Config.settings import *
 from version2_python.Dice.dice import Dice, rollInitiative
 
 class Unit:
-    def __init__(self, name, nicknames=[], hp=0, armor=0, initiative=0, initiative_mod=0, note=None):
+    def __init__(self, name, nicknames=[], hp=0, armor=0, initiative=0, initiative_mod=0, note=""):
         self.name = name
         self.nicknames = nicknames
         self.hp = hp
@@ -29,13 +29,27 @@ class Unit:
         self.status = [x for x in self.status if x.isActive() == 0]
 
     def printSimple(self):
+        string = ""
+
         name = "Name: {}".format(self.name)
+        string += name
+
         hp = "Health: {}".format(self.hp)
+        string += ", {}".format(hp)
+
         armor = "Armor: {}".format(self.armor)
+        string += ", {}".format(armor)
+
         initiative = "Initiative: {}".format(self.initiative)
+        string += ", {}".format(initiative)
+
         status = "Status: {}".format(self.status)
+        if len(self.status) > 0: string += ", {}".format(status)
+
         note = "Notes: {}".format(self.note)
-        return "{},{},{},{},{},{}".format(name, hp, armor, initiative, status, note)
+        if len(self.note) > 0: string += ", {}".format(note)
+
+        return string
 
     def printDetail(self):
         # TODO:

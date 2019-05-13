@@ -1,5 +1,6 @@
 from version2_python.Actors.status import Status
 from version2_python.Actors.unit import Unit
+from version2_python.Dice.dice import rollInitiative
 from version2_python.Encounter.encounter import Encounter
 from version2_python.Parser.lexer import *
 from version2_python.help.help import printHelpMenu
@@ -90,12 +91,14 @@ def p_command_next_turn(t):
     'command : NEXTTURN'
     global encounter
     encounter.nextTurn()
+    print(str(encounter))
 
 
 def p_command_reset(t):
     'command : RESET'
     global encounter
     encounter = Encounter()
+    print(str(encounter))
 
 
 def p_command_help(t):
@@ -107,17 +110,21 @@ def p_command_create_unit(t):
     'command : CREATE unit'
     global encounter
     encounter.addUnit(t[2])
+    encounter.sortUnits()
+    print(str(encounter))
 
 
 def p_command_delete_unit(t):
     'command : DELETE NAME'
     global encounter
     encounter.deleteUnit(t[2])
+    print(str(encounter))
 
 
 def p_unit(t):
     '''unit : NAME expression'''
-    t[0] = Unit(t[1], initiative=t[2])
+    unit = Unit(t[1], initiative=rollInitiative(t[2]), initiative_mod=t[2])
+    t[0] = unit
 
 
 def p_status(t):
@@ -133,6 +140,7 @@ def p_command_edit_armor(t):
         unit.armor = t[3]
     except Exception:
         print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
 
 
 def p_command_edit_health(t):
@@ -143,6 +151,7 @@ def p_command_edit_health(t):
         unit.hp = t[3]
     except Exception:
         print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
 
 
 def p_command_edit_initiative(t):
@@ -153,6 +162,7 @@ def p_command_edit_initiative(t):
         unit.initiative_mod = t[3]
     except Exception:
         print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
 
 
 def p_command_edit_note(t):
@@ -163,6 +173,7 @@ def p_command_edit_note(t):
         unit.note = t[3]
     except Exception:
         print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
 
 
 def p_command_edit_status(t):
@@ -173,6 +184,7 @@ def p_command_edit_status(t):
         unit.status.append(t[3])
     except Exception:
         print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
 
 
 def p_error(t):
