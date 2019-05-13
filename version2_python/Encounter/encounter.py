@@ -68,7 +68,8 @@ class Encounter:
         round = "Round : {}".format(self.round_count+1)
 
         status = ""
-        if len(self.global_status) > 0: status = "Global Status Effects"
+        if len(self.global_status) > 0:
+            status = "Global Status Effects"
             for i in range(len(self.global_status)):
                 status_string = self.global_status[i].printSimple()
                 status = "  {}\n    {}".format(status, status_string)

@@ -1,12 +1,9 @@
 from version2_python.Actors.unit import Unit
 from version2_python.Parser.lexer import *
-from version2_python.Dice.dice import *
-from version2_python.runDungeonCalc import encounter
 
 precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
-    ('left', 'DICE'),
     ('right', 'UMINUS'),
 )
 
@@ -44,18 +41,14 @@ def p_expression_group(t):
     t[0] = t[2]
 
 
-def p_expression_number(t):
-    'expression : NUMBER'
+def p_expression_dice(t):
+    '''expression : DICE'''
     t[0] = t[1]
 
 
-def p_expression_dice(t):
-    '''expression : DICE NUMBER
-                  | NUMBER DICE NUMBER'''
-    if len(t) == 4:
-        t[0] = Dice(t[3]).roll(t[1])
-    else:
-        t[0] = Dice(t[2]).roll()
+def p_expression_number(t):
+    'expression : NUMBER'
+    t[0] = t[1]
 
 
 def p_command_expression(t):
@@ -86,10 +79,6 @@ def p_command_load_item(t):
         encounter.addUnit(data)
 
 
-def p_command_pc_create(t):
-    'command : CREATE PC '
-
-
 def p_error(t):
     print("Syntax error at '%s'" % t.value)
 
@@ -107,3 +96,4 @@ def startParser():
         except EOFError:
             break
         parser.parse(s)
+

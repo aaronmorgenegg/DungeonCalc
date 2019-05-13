@@ -1,9 +1,9 @@
 import pickle
 
-from version2_python.FileManager.dummyFileManager import fileManager
+from version2_python.FileManager.dummyFileManager import DummyFileManager
 
 
-class PickleFileManager(fileManager):
+class PickleFileManager(DummyFileManager):
     def save(self, data, filename):
         with open(".pk1".format(filename), "wb") as file:
             pickle.dump(data, file, pickle.HIGHEST_PROTOCOL)
