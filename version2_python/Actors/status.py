@@ -19,9 +19,5 @@ class Status:
         note = "Notes: {}".format(self.note)
         return "{}({}, {})".format(name, time, note)
 
-    def printDetail(self):
-        # TODO:
-        return self.printSimple()
-
     def __str__(self):
         return self.printSimple()

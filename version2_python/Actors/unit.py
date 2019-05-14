@@ -56,9 +56,5 @@ class Unit:
 
         return string
 
-    def printDetail(self):
-        # TODO:
-        return self.printSimple()
-
     def __str__(self):
         return self.printSimple()
