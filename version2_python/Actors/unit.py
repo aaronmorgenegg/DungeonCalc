@@ -1,16 +1,15 @@
 from version2_python.Config.settings import *
-from version2_python.Dice.dice import Dice, rollInitiative
+from version2_python.Dice.dice import rollInitiative
 
 class Unit:
-    def __init__(self, name, nicknames=[], hp=0, armor=0, initiative=0, initiative_mod=0, note=""):
+    def __init__(self, name, hp=0, armor=0, initiative=0, initiative_mod=0, note="", status=[]):
         self.name = name
-        self.nicknames = nicknames
         self.hp = hp
         self.armor = armor
         self.initiative = initiative
         self.initiative_mod = initiative_mod
         self.note = note
-        self.status = []
+        self.status = status
 
     def updateTurn(self):
         self.__updateStatus()
@@ -25,8 +24,9 @@ class Unit:
     def __updateStatus(self):
         for status in self.status:
             status.update()
+            if not status.isActive(): print("{} has expired".format(status.name))
 
-        self.status = [x for x in self.status if x.isActive() == 0]
+        self.status = [x for x in self.status if x.isActive()]
 
     def printSimple(self):
         string = ""
@@ -43,11 +43,13 @@ class Unit:
         initiative = "Initiative: {}".format(self.initiative)
         string += ", {}".format(initiative)
 
-        status = "Status: {}".format(self.status)
+        status = "Status: "
+        for s in self.status:
+            status += str(s) + ", "
         if len(self.status) > 0: string += ", {}".format(status)
 
         note = "Notes: {}".format(self.note)
-        if len(self.note) > 0: string += ", {}".format(note)
+        if len(self.note) > 0: string += "{}".format(note)
 
         return string
 

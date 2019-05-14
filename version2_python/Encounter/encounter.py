@@ -54,6 +54,7 @@ class Encounter:
             status.update()
 
     def nextTurn(self):
+        if len(self.units) == 0: return
         self.units[self.current_unit].updateTurn()
         self.current_unit += 1
         if self.current_unit >= len(self.units):

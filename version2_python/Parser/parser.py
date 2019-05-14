@@ -123,7 +123,37 @@ def p_command_delete_unit(t):
 
 def p_unit(t):
     '''unit : NAME expression'''
-    unit = Unit(t[1], initiative=rollInitiative(t[2]), initiative_mod=t[2])
+    unit = Unit(t[1],
+                initiative=rollInitiative(t[2]),
+                initiative_mod=t[2],
+                hp=0,
+                armor=0,
+                note="",
+                status=[])
+    t[0] = unit
+
+
+def p_unit_hp(t):
+    '''unit : unit HEALTH expression'''
+    unit = Unit(t[1].name,
+                initiative=t[1].initiative,
+                initiative_mod=t[1].initiative_mod,
+                hp=t[3],
+                armor=t[1].armor,
+                note=t[1].note,
+                status=t[1].status)
+    t[0] = unit
+
+
+def p_unit_status(t):
+    '''unit : unit STATUS status'''
+    unit = Unit(t[1].name,
+                initiative=t[1].initiative,
+                initiative_mod=t[1].initiative_mod,
+                hp=t[1].hp,
+                armor=t[1].armor,
+                note=t[1].note,
+                status=[t[3]])
     t[0] = unit
 
 

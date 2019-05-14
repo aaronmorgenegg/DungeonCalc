@@ -1,8 +1,7 @@
 
 class Status:
-    def __init__(self, name, nicknames, time_total, note=None):
+    def __init__(self, name, time_total, note=None):
         self.name = name
-        self.nicknames = nicknames
         self.time_total = time_total
         self.time_remaining = time_total
         self.note = note
@@ -15,10 +14,10 @@ class Status:
         return True
 
     def printSimple(self):
-        name = "Name: {}".format(self.name)
+        name = self.name
         time = "Time: {}/{}".format(self.time_remaining, self.time_total)
         note = "Notes: {}".format(self.note)
-        return "{},{},{}".format(name, time, note)
+        return "{}({}, {})".format(name, time, note)
 
     def printDetail(self):
         # TODO:
