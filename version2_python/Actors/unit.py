@@ -17,6 +17,9 @@ class Unit:
     def updateRound(self):
         self.__updateInitiative()
 
+    def removeStatus(self, status_name):
+        self.status = [status for status in self.status if status.name != status_name]
+
     def __updateInitiative(self):
         if REROLL_INITIATIVE_EACH_ROUND is True:
             self.initiative = rollInitiative(self.initiative_mod)

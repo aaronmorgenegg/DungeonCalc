@@ -114,6 +114,25 @@ def p_command_create_unit(t):
     print(str(encounter))
 
 
+def p_command_create_multiple_units(t):
+    'command : CREATE expression unit'
+    global encounter
+    unit = t[3]
+    num = t[2]
+    for i in range(num):
+        new_unit = Unit(unit.name + str(i+1),
+                initiative=rollInitiative(unit.initiative_mod),
+                initiative_mod=unit.initiative_mod,
+                hp=unit.hp,
+                armor=unit.armor,
+                note=unit.note,
+                status=unit.status)
+        encounter.addUnit(new_unit)
+
+    encounter.sortUnits()
+    print(str(encounter))
+
+
 def p_command_delete_unit(t):
     'command : DELETE NAME'
     global encounter
@@ -145,6 +164,18 @@ def p_unit_hp(t):
     t[0] = unit
 
 
+def p_unit_armor(t):
+    '''unit : unit ARMOR expression'''
+    unit = Unit(t[1].name,
+                initiative=t[1].initiative,
+                initiative_mod=t[1].initiative_mod,
+                hp=t[1].hp,
+                armor=t[3],
+                note=t[1].note,
+                status=t[1].status)
+    t[0] = unit
+
+
 def p_unit_status(t):
     '''unit : unit STATUS status'''
     unit = Unit(t[1].name,
@@ -154,6 +185,18 @@ def p_unit_status(t):
                 armor=t[1].armor,
                 note=t[1].note,
                 status=[t[3]])
+    t[0] = unit
+
+
+def p_unit_note(t):
+    '''unit : unit NOTE NAME'''
+    unit = Unit(t[1].name,
+                initiative=t[1].initiative,
+                initiative_mod=t[1].initiative_mod,
+                hp=t[1].hp,
+                armor=t[1].armor,
+                note=t[3],
+                status=t[1].status)
     t[0] = unit
 
 
@@ -206,12 +249,23 @@ def p_command_edit_note(t):
     print(str(encounter))
 
 
-def p_command_edit_status(t):
+def p_command_add_status(t):
     '''command : NAME STATUS status'''
     global encounter
     try:
         unit = encounter.lookupName(t[1])
         unit.status.append(t[3])
+    except Exception:
+        print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
+
+
+def p_command_rm_status(t):
+    '''command : NAME DELETE STATUS NAME'''
+    global encounter
+    try:
+        unit = encounter.lookupName(t[1])
+        unit.removeStatus(t[4])
     except Exception:
         print("Error looking up name {}".format(t[1]))
     print(str(encounter))
