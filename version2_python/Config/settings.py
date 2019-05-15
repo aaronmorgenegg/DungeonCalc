@@ -7,5 +7,5 @@ FILE_MANAGER = 'json'
 FILE_TEMPLATE = 'Bestiary/{}'
 
 # Party files
-FAVORITE_FILES = ["bob.json", "wyatt.json", "colton.json"]
+FAVORITE_FILES = ["bob", "wyatt", "colton"]
 LAST_ENCOUNTER = "last_encounter"

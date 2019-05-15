@@ -105,19 +105,27 @@ def p_command_save_favorites(t):
 def p_command_load_encounter(t):
     'command : LOAD'
     global encounter
-    last_encounter = encounter.file_manager.load(FILE_TEMPLATE.format(LAST_ENCOUNTER))
-    for name in last_encounter:
-        attributes = encounter.file_manager.load(FILE_TEMPLATE.format(name))
-        unit = Unit(**attributes)
-        encounter.addUnit(unit)
+    try:
+        last_encounter = encounter.file_manager.load(FILE_TEMPLATE.format(LAST_ENCOUNTER))
+        for name in last_encounter:
+            attributes = encounter.file_manager.load(FILE_TEMPLATE.format(name))
+            unit = Unit(**attributes)
+            encounter.addUnit(unit)
+    except Exception as e:
+        print(e)
+        print("Error loading last encounter")
     print(str(encounter))
 
 def p_command_load_item(t):
     'command : LOAD NAME'
     global encounter
-    attributes = encounter.file_manager.load(FILE_TEMPLATE.format(t[2]))
-    unit = Unit(**attributes)
-    encounter.addUnit(unit)
+    try:
+        attributes = encounter.file_manager.load(FILE_TEMPLATE.format(t[2]))
+        unit = Unit(**attributes)
+        encounter.addUnit(unit)
+    except Exception as e:
+        print(e)
+        print("Error loading item {}".format(t[2]))
     print(str(encounter))
 
 
@@ -273,13 +281,14 @@ def p_status(t):
 
 
 def p_command_favorite(t):
-    '''status : NAME FAVORITE'''
+    '''command : NAME FAVORITE'''
     global encounter
     try:
         unit = encounter.lookupName(t[1])
         print("{} set to Favorite: {}".format(unit.name, not unit.favorite))
         unit.favorite = not unit.favorite
-    except Exception:
+    except Exception as e:
+        print(e)
         print("Error looking up name {}".format(t[1]))
     print(str(encounter))
 

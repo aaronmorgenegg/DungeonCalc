@@ -23,10 +23,10 @@ class Encounter:
 
     def lookupName(self, name):
         for unit in self.units:
-            if name == unit.name or name in unit.nicknames:
+            if name == unit.name:
                 return unit
         for status in self.status:
-            if name == status.name or name in status.nicknames:
+            if name == status.name:
                 return status
         raise Exception("Error: lookupName failed for name {}".format(name))
 
