@@ -1,5 +1,6 @@
 from version2_python.Config.settings import *
 from version2_python.FileManager.dummyFileManager import DummyFileManager
+from version2_python.FileManager.jsonFileManager import JsonFileManager
 from version2_python.FileManager.pickleFileManager import PickleFileManager
 
 
@@ -14,6 +15,8 @@ class Encounter:
     def _initFileManager(self):
         if FILE_MANAGER == 'pickle':
             self.file_manager = PickleFileManager()
+        if FILE_MANAGER == 'json':
+            self.file_manager = JsonFileManager()
         else:
             print("WARNING: Using dummy file manager")
             self.file_manager = DummyFileManager()

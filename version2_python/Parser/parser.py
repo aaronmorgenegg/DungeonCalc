@@ -1,5 +1,6 @@
 from version2_python.Actors.status import Status
 from version2_python.Actors.unit import Unit
+from version2_python.Config.settings import FILE_TEMPLATE, FAVORITE_FILES
 from version2_python.Dice.dice import rollInitiative
 from version2_python.Encounter.encounter import Encounter
 from version2_python.Parser.lexer import *
@@ -61,30 +62,63 @@ def p_expression_number(t):
     t[0] = t[1]
 
 
-# def p_command_save_encounter(t):
-#     'command : SAVE'
-#     global encounter
-#     encounter.file_manager.save(encounter, "latest_encounter")
-#
-#
-# def p_command_save_item(t):
-#     'command : SAVE NAME'
-#     global encounter
-#     data = encounter.lookupName(t[2])
-#     encounter.file_manager.save(data, t[2])
-#
-#
+def p_command_save_encounter(t):
+    global encounter
+    for unit in encounter.units:
+        try:
+            encounter.file_manager.save(unit.__dict__, FILE_TEMPLATE.format(unit.name))
+        except Exception as e:
+            print(e)
+            print("Error saving {}".format(unit.name))
+
+
+def p_command_save_item(t):
+    'command : SAVE NAME'
+    global encounter
+    try:
+        data = encounter.lookupName(t[2])
+        encounter.file_manager.save(data.__dict__, FILE_TEMPLATE.format(t[2]))
+    except Exception as e:
+        print(e)
+        print("Error saving {}".format(t[2]))
+
+
+def p_command_save_favorites(t):
+    'command : SAVE FAVORITE'
+    global encounter
+    for unit in encounter.getFavorites():
+        try:
+            encounter.file_manager.save(unit.__dict__, FILE_TEMPLATE.format(unit.name))
+        except Exception as e:
+            print(e)
+            print("Error saving {}".format(unit.name))
+
+
 # def p_command_load_encounter(t):
 #     'command : LOAD'
 #     global encounter
 #     encounter.file_manager.load("latest_encounter")
-#
-# def p_command_load_item(t):
-#     'command : LOAD NAME'
-#     global encounter
-#     data = encounter.file_manager.load(t[2])
-#     if isinstance(data, Unit):
-#         encounter.addUnit(data)
+
+def p_command_load_item(t):
+    'command : LOAD NAME'
+    global encounter
+    attributes = encounter.file_manager.load(t[2])
+    unit = Unit(attributes)
+    encounter.addUnit(unit)
+    print(str(encounter))
+
+
+def p_command_load_favorites(t):
+    global encounter
+    for file in FAVORITE_FILES:
+        try:
+            attributes = encounter.file_manager.load(file)
+            unit = Unit(attributes)
+            encounter.addUnit(unit)
+            print(str(encounter))
+        except Exception as e:
+            print(e)
+            print("Error loading {}".format(file))
 
 
 def p_command_next_turn(t):
