@@ -10,6 +10,7 @@ precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE'),
     ('right', 'UMINUS'),
+    ('right', 'UPLUS'),
 )
 
 # dictionary of names
@@ -45,6 +46,11 @@ def p_expression_binop(t):
 def p_expression_uminus(t):
     'expression : MINUS expression %prec UMINUS'
     t[0] = -t[2]
+
+
+def p_expression_uplus(t):
+    'expression : PLUS expression %prec UPLUS'
+    t[0] = t[2]
 
 
 def p_expression_group(t):
