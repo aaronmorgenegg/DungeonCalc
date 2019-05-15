@@ -1,6 +1,6 @@
 from version2_python.Actors.status import Status
 from version2_python.Actors.unit import Unit
-from version2_python.Config.settings import FILE_TEMPLATE, FAVORITE_FILES
+from version2_python.Config.settings import FILE_TEMPLATE, FAVORITE_FILES, LAST_ENCOUNTER
 from version2_python.Dice.dice import rollInitiative
 from version2_python.Encounter.encounter import Encounter
 from version2_python.Parser.lexer import *
@@ -63,6 +63,7 @@ def p_expression_number(t):
 
 
 def p_command_save_encounter(t):
+    'command : SAVE'
     global encounter
     for unit in encounter.units:
         try:
@@ -70,6 +71,7 @@ def p_command_save_encounter(t):
         except Exception as e:
             print(e)
             print("Error saving {}".format(unit.name))
+    encounter.file_manager.save([unit.name for unit in encounter.units], FILE_TEMPLATE.format(LAST_ENCOUNTER))
 
 
 def p_command_save_item(t):
@@ -94,26 +96,32 @@ def p_command_save_favorites(t):
             print("Error saving {}".format(unit.name))
 
 
-# def p_command_load_encounter(t):
-#     'command : LOAD'
-#     global encounter
-#     encounter.file_manager.load("latest_encounter")
+def p_command_load_encounter(t):
+    'command : LOAD'
+    global encounter
+    last_encounter = encounter.file_manager.load(FILE_TEMPLATE.format(LAST_ENCOUNTER))
+    for name in last_encounter:
+        attributes = encounter.file_manager.load(FILE_TEMPLATE.format(name))
+        unit = Unit(**attributes)
+        encounter.addUnit(unit)
+    print(str(encounter))
 
 def p_command_load_item(t):
     'command : LOAD NAME'
     global encounter
-    attributes = encounter.file_manager.load(t[2])
-    unit = Unit(attributes)
+    attributes = encounter.file_manager.load(FILE_TEMPLATE.format(t[2]))
+    unit = Unit(**attributes)
     encounter.addUnit(unit)
     print(str(encounter))
 
 
 def p_command_load_favorites(t):
+    'command : LOAD FAVORITE'
     global encounter
     for file in FAVORITE_FILES:
         try:
-            attributes = encounter.file_manager.load(file)
-            unit = Unit(attributes)
+            attributes = encounter.file_manager.load(FILE_TEMPLATE.format(file))
+            unit = Unit(**attributes)
             encounter.addUnit(unit)
             print(str(encounter))
         except Exception as e:

@@ -8,3 +8,4 @@ FILE_TEMPLATE = 'Bestiary/{}'
 
 # Party files
 FAVORITE_FILES = ["bob.json", "wyatt.json", "colton.json"]
+LAST_ENCOUNTER = "last_encounter"
