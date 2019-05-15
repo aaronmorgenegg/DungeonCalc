@@ -2,7 +2,7 @@ from version2_python.Config.settings import *
 from version2_python.Dice.dice import rollInitiative
 
 class Unit:
-    def __init__(self, name, hp=0, armor=0, initiative=0, initiative_mod=0, note="", status=[]):
+    def __init__(self, name, hp=0, armor=0, initiative=0, initiative_mod=0, note="", status=[], favorite=False):
         self.name = name
         self.hp = hp
         self.armor = armor
@@ -10,6 +10,7 @@ class Unit:
         self.initiative_mod = initiative_mod
         self.note = note
         self.status = status
+        self.favorite = favorite
 
     def updateTurn(self):
         self.__updateStatus()
@@ -52,7 +53,7 @@ class Unit:
         if len(self.status) > 0: string += ", {}".format(status)
 
         note = "Notes: {}".format(self.note)
-        if len(self.note) > 0: string += "{}".format(note)
+        if len(self.note) > 0: string += ", {}".format(note)
 
         return string
 

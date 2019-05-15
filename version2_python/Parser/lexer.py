@@ -34,6 +34,11 @@ reserved = {
     'delete': 'DELETE',
     'rm': 'DELETE',
     'remove': 'DELETE',
+    'favorite': 'FAVORITE',
+    'star': 'FAVORITE',
+    'fav': 'FAVORITE',
+    'pc': 'FAVORITE',
+    'party': 'FAVORITE',
 }
 
 tokens = [

@@ -27,6 +27,20 @@ class Encounter:
                 return status
         raise Exception("Error: lookupName failed for name {}".format(name))
 
+    def reset(self):
+        self.round_count = 0
+        self.current_unit = 0
+        self.global_status = []
+        self.units = self.getFavorites()
+
+    def getFavorites(self):
+        favorites = []
+        for unit in self.units:
+            if unit.favorite:
+                favorites.append(unit)
+        return favorites
+
+
     def addUnit(self, unit):
         # TODO: make unit names unique
         self.units.append(unit)

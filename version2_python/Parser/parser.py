@@ -97,7 +97,7 @@ def p_command_next_turn(t):
 def p_command_reset(t):
     'command : RESET'
     global encounter
-    encounter = Encounter()
+    encounter.reset()
     print(str(encounter))
 
 
@@ -126,7 +126,8 @@ def p_command_create_multiple_units(t):
                 hp=unit.hp,
                 armor=unit.armor,
                 note=unit.note,
-                status=unit.status)
+                status=unit.status,
+                favorite=unit.favorite)
         encounter.addUnit(new_unit)
 
     encounter.sortUnits()
@@ -148,7 +149,8 @@ def p_unit(t):
                 hp=0,
                 armor=0,
                 note="",
-                status=[])
+                status=[],
+                favorite=False)
     t[0] = unit
 
 
@@ -160,7 +162,8 @@ def p_unit_hp(t):
                 hp=t[3],
                 armor=t[1].armor,
                 note=t[1].note,
-                status=t[1].status)
+                status=t[1].status,
+                favorite=t[1].favorite)
     t[0] = unit
 
 
@@ -172,7 +175,8 @@ def p_unit_armor(t):
                 hp=t[1].hp,
                 armor=t[3],
                 note=t[1].note,
-                status=t[1].status)
+                status=t[1].status,
+                favorite=t[1].favorite)
     t[0] = unit
 
 
@@ -184,7 +188,8 @@ def p_unit_status(t):
                 hp=t[1].hp,
                 armor=t[1].armor,
                 note=t[1].note,
-                status=[t[3]])
+                status=[t[3]],
+                favorite=t[1].favorite)
     t[0] = unit
 
 
@@ -196,13 +201,39 @@ def p_unit_note(t):
                 hp=t[1].hp,
                 armor=t[1].armor,
                 note=t[3],
-                status=t[1].status)
+                status=t[1].status,
+                favorite=t[1].favorite)
+    t[0] = unit
+
+
+def p_unit_favorite(t):
+    '''unit : unit FAVORITE'''
+    unit = Unit(t[1].name,
+                initiative=t[1].initiative,
+                initiative_mod=t[1].initiative_mod,
+                hp=t[1].hp,
+                armor=t[1].armor,
+                note=t[1].note,
+                status=t[1].status,
+                favorite=True)
     t[0] = unit
 
 
 def p_status(t):
     '''status : NAME expression'''
     t[0] = Status(t[1], time_total=t[2])
+
+
+def p_command_favorite(t):
+    '''status : NAME FAVORITE'''
+    global encounter
+    try:
+        unit = encounter.lookupName(t[1])
+        print("{} set to Favorite: {}".format(unit.name, not unit.favorite))
+        unit.favorite = not unit.favorite
+    except Exception:
+        print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
 
 
 def p_command_edit_armor(t):
