@@ -5,6 +5,7 @@ class Unit:
     def __init__(self, name, hp=0, armor=0, initiative=0, initiative_mod=0, note="", status=[], favorite=False):
         self.name = name
         self.hp = hp
+        self.hp_total = hp
         self.armor = armor
         self.initiative = initiative
         self.initiative_mod = initiative_mod
@@ -38,18 +39,23 @@ class Unit:
         name = "Name: {}".format(self.name)
         string += name
 
-        hp = "Health: {}".format(self.hp)
+        hp = "Health: {}/{}".format(self.hp, self.hp_total)
         string += ", {}".format(hp)
 
         armor = "Armor: {}".format(self.armor)
-        string += ", {}".format(armor)
+        if armor != 0: string += ", {}".format(armor)
 
         initiative = "Initiative: {}".format(self.initiative)
         string += ", {}".format(initiative)
 
         status = "Status: "
+        hack_counter = 0
         for s in self.status:
-            status += str(s) + ", "
+            if hack_counter == 0:
+                status += str(s)
+                hack_counter += 1
+            else:
+                status += ", " + str(s)
         if len(self.status) > 0: string += ", {}".format(status)
 
         note = "Notes: {}".format(self.note)

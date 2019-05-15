@@ -39,6 +39,11 @@ reserved = {
     'fav': 'FAVORITE',
     'pc': 'FAVORITE',
     'party': 'FAVORITE',
+    'attack': 'DAMAGE',
+    'damage': 'DAMAGE',
+    'hit': 'DAMAGE',
+    'hurt': 'DAMAGE',
+    'heal': 'HEAL',
 }
 
 tokens = [

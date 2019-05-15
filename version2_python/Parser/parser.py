@@ -315,6 +315,33 @@ def p_command_edit_health(t):
     print(str(encounter))
 
 
+def p_command_damage(t):
+    '''command : NAME DAMAGE expression'''
+    global encounter
+    try:
+        unit = encounter.lookupName(t[1])
+        unit.hp = unit.hp - t[3]
+        if unit.hp/unit.hp_total < .5 and (unit.hp+t[3])/unit.hp_total >= .5:
+            print("{} has been bloodied".format(unit.name))
+        if unit.hp <= 0:
+            print("{} has been fatally wounded".format(unit.name))
+    except Exception:
+        print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
+
+
+def p_command_heal(t):
+    '''command : NAME HEAL expression'''
+    global encounter
+    try:
+        unit = encounter.lookupName(t[1])
+        unit.hp = unit.hp + t[3]
+        if unit.hp > unit.hp_total: unit.hp = unit.hp_total
+    except Exception:
+        print("Error looking up name {}".format(t[1]))
+    print(str(encounter))
+
+
 def p_command_edit_initiative(t):
     '''command : NAME INITIATIVE expression'''
     global encounter
