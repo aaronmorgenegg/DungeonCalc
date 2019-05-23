@@ -2,10 +2,11 @@ from version2_python.Config.settings import *
 from version2_python.Dice.dice import rollInitiative
 
 class Unit:
-    def __init__(self, name, hp=0, armor=0, initiative=0, initiative_mod=0, note="", status=[], favorite=False):
+    def __init__(self, name, hp=0, armor=0, initiative=0, initiative_mod=0, note="", status=[], favorite=False, hp_total=None):
         self.name = name
         self.hp = hp
-        self.hp_total = hp
+        self.hp_total = hp_total
+        if self.hp_total is None: self.hp_total = self.hp
         self.armor = armor
         self.initiative = initiative
         self.initiative_mod = initiative_mod
